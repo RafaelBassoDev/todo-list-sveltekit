@@ -1,33 +1,25 @@
 <script lang="ts">
     import Item from '$lib/Item.svelte';
-    import ItemModel from '$lib/models/ItemModel';
+    import type ItemModel from '$lib/models/ItemModel';
+    import { items } from '$lib/stores/stores';
 
-    let titles = ['item 1', 'item 2', 'item 3', 'item 4'];
-
-    let date = new Date();
-
-    let models: ItemModel[] = [
-        new ItemModel(
-            'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.',
-            date
-        ),
-        new ItemModel('Lorem ipsum dolor sit amet.', date),
-        new ItemModel('Lorem ipsum dolor sit amet.', date),
-        new ItemModel('Lorem ipsum dolor sit amet.', date)
-    ];
-
-    function onEdit() {
+    function onEdit(e: CustomEvent) {
         console.log('edit');
     }
-    function onDelete() {
-        console.log('delete');
+    function onDelete(e: CustomEvent<ItemModel>) {
+        console.log('delete ' + e.detail.id);
+        $items = $items.filter((item) => item.id != e.detail.id);
     }
 </script>
 
 <div class="container">
-    {#each models as model}
-        <Item {...model} on:edit={onEdit} on:delete={onDelete} />
-    {/each}
+    {#if $items.length != 0}
+        {#each $items as item}
+            <Item {item} on:edit={onEdit} on:delete={onDelete} />
+        {/each}
+    {:else}
+        <div class="warning">No items!</div>
+    {/if}
 </div>
 
 <style>
@@ -41,6 +33,9 @@
         margin: 0;
         padding: 0;
         border: none;
+
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #2f3542;
     }
 
     .container {
@@ -51,5 +46,13 @@
         display: flex;
         flex-direction: column;
         gap: 1em;
+    }
+
+    .warning {
+        display: flex;
+        justify-content: center;
+
+        font-size: 2em;
+        padding: 1em;
     }
 </style>
