@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte';
+    import { createEventDispatcher, onMount } from 'svelte';
     import type ItemModel from '$models/ItemModel';
     import DetailButton from '$components/DetailButton.svelte';
     import deleteIcon from '$assets/icons/delete-icon.svg';
@@ -9,7 +9,11 @@
 
     let checked = false;
 
-    const dispatch = createEventDispatcher<{ edit: ItemModel; delete: ItemModel }>();
+    const dispatch = createEventDispatcher<{
+        edit: ItemModel;
+        delete: ItemModel;
+        check: ItemModel;
+    }>();
 
     function onEdit() {
         dispatch('edit', item);
@@ -18,14 +22,22 @@
     function onDelete() {
         dispatch('delete', item);
     }
+
+    function onCheck() {
+        dispatch('check', item);
+    }
+
+    onMount(() => {
+        checked = item.isChecked;
+    });
 </script>
 
 <div class="item">
     <div class="content">
-        <input class="checkbox detail" type="checkbox" bind:checked />
+        <input class="checkbox" type="checkbox" bind:checked on:change={onCheck} />
 
         <div class="item-info">
-            <span class="title">{item.title}</span>
+            <span class:checked class="title">{item.title}</span>
             <span class="timestamp">{item.timestamp.toLocaleString()}</span>
         </div>
 
@@ -63,6 +75,12 @@
 
     .item-info .timestamp {
         font-size: 1.5em;
+        color: #747d8c;
+    }
+
+    .checked {
+        text-decoration: line-through;
+        color: #747d8c;
     }
 
     input[type='checkbox'] {
