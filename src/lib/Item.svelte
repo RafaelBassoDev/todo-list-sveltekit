@@ -1,25 +1,22 @@
 <script lang="ts">
+    import { createEventDispatcher } from 'svelte';
+    import type ItemModel from './models/ItemModel';
     import DetailButton from './DetailButton.svelte';
     import deleteIcon from '$assets/icons/delete-icon.svg';
     import editIcon from '$assets/icons/edit-icon.svg';
-    import { createEventDispatcher } from 'svelte';
 
-    export let title: string;
-    export let timestamp: Date;
+    export let item: ItemModel;
 
     let checked = false;
 
-    const dispatch = createEventDispatcher();
+    const dispatch = createEventDispatcher<{ edit: ItemModel; delete: ItemModel }>();
 
     function onEdit() {
-        dispatch('edit', {
-            title: title,
-            timestamp: timestamp
-        });
+        dispatch('edit', item);
     }
 
     function onDelete() {
-        dispatch('delete');
+        dispatch('delete', item);
     }
 </script>
 
@@ -28,8 +25,8 @@
         <input class="checkbox detail" type="checkbox" bind:checked />
 
         <div class="item-info">
-            <span class="title">{title}</span>
-            <span class="timestamp">{timestamp.toLocaleString()}</span>
+            <span class="title">{item.title}</span>
+            <span class="timestamp">{item.timestamp.toLocaleString()}</span>
         </div>
 
         <DetailButton icon={editIcon} on:click={onEdit} --hover-color="#70a1ff" />
@@ -58,9 +55,6 @@
         flex-direction: column;
         justify-content: flex-start;
         row-gap: 0.5em;
-
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #2f3542;
     }
 
     .item-info .title {
