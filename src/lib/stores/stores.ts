@@ -1,5 +1,5 @@
-import ItemModel from '$lib/models/ItemModel';
 import { writable } from 'svelte/store';
+import ItemModel from '$models/ItemModel';
 
 const date = new Date();
 

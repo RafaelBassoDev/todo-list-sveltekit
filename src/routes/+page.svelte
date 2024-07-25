@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Item from '$lib/Item.svelte';
-    import type ItemModel from '$lib/models/ItemModel';
-    import { items } from '$lib/stores/stores';
+    import Item from '$components/Item.svelte';
+    import type ItemModel from '$models/ItemModel';
+    import { items } from '$stores/stores';
 
     function onEdit(e: CustomEvent) {
         console.log('edit');

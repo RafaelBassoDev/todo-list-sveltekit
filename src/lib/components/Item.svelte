@@ -1,7 +1,7 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte';
-    import type ItemModel from './models/ItemModel';
-    import DetailButton from './DetailButton.svelte';
+    import type ItemModel from '$models/ItemModel';
+    import DetailButton from '$components/DetailButton.svelte';
     import deleteIcon from '$assets/icons/delete-icon.svg';
     import editIcon from '$assets/icons/edit-icon.svg';
 

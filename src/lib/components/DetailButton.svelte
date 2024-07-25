@@ -1,5 +1,4 @@
 <script>
-    import deleteIcon from '$assets/icons/delete-icon.svg';
     export let icon;
 </script>
 
