@@ -1,9 +1,19 @@
 <script>
     export let icon;
+
+    let hover = false;
 </script>
 
-<button on:click>
-    <img src={icon} alt="Icon" />
+<button
+    on:click
+    on:mouseenter={() => {
+        hover = true;
+    }}
+    on:mouseleave={() => {
+        hover = false;
+    }}
+>
+    <img class:hover src={icon} alt="Icon" />
 </button>
 
 <style>
@@ -31,5 +41,10 @@
 
     img {
         width: 70%;
+    }
+
+    .hover {
+        filter: invert(100%) sepia(12%) saturate(7464%) hue-rotate(289deg) brightness(113%)
+            contrast(117%);
     }
 </style>
