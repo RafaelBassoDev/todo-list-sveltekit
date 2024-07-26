@@ -1,11 +1,13 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export default class ItemModel {
-    id: number;
+    id: string;
     title: string;
     timestamp: Date;
     isChecked: boolean;
 
-    constructor(id: number, title: string, timestamp: Date, isChecked: boolean = false) {
-        this.id = id;
+    constructor(title: string, timestamp: Date, isChecked: boolean = false) {
+        this.id = uuidv4();
         this.title = title;
         this.timestamp = timestamp;
         this.isChecked = isChecked;
