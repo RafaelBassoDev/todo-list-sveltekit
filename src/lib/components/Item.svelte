@@ -1,10 +1,11 @@
 <script lang="ts">
-    import { createEventDispatcher, tick } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
+    import { topmostItem } from '$stores/stores';
     import type ItemModel from '$models/ItemModel';
     import DetailButton from '$components/DetailButton.svelte';
+    import TextInput from '$components/TextInput.svelte';
     import deleteIcon from '$assets/icons/delete-icon.svg';
     import editIcon from '$assets/icons/edit-icon.svg';
-    import TextInput from './TextInput.svelte';
 
     export let item: ItemModel;
 
@@ -13,8 +14,6 @@
     function onEdit() {
         isEditing = true;
     }
-
-    $: checked = item.isChecked;
 
     const dispatch = createEventDispatcher<{
         delete: ItemModel;
@@ -27,6 +26,14 @@
 
     function onCheck() {
         dispatch('check', item);
+    }
+
+    $: checked = item.isChecked;
+
+    $: if (item.id === topmostItem?.id) {
+        if (item.title === '') {
+            isEditing = true;
+        }
     }
 </script>
 
