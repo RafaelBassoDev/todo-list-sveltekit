@@ -8,7 +8,7 @@
 <div class="container">
     {#if items != null && items.length != 0}
         {#each items as item}
-            <Item {item} on:edit on:delete on:check />
+            <Item {item} on:delete on:check />
         {/each}
     {:else}
         <div class="warning">No items!</div>

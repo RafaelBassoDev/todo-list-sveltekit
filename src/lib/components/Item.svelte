@@ -1,21 +1,25 @@
 <script lang="ts">
-    import { beforeUpdate, createEventDispatcher, onMount } from 'svelte';
+    import { createEventDispatcher, tick } from 'svelte';
     import type ItemModel from '$models/ItemModel';
     import DetailButton from '$components/DetailButton.svelte';
     import deleteIcon from '$assets/icons/delete-icon.svg';
     import editIcon from '$assets/icons/edit-icon.svg';
+    import TextInput from './TextInput.svelte';
 
     export let item: ItemModel;
 
+    let isEditing = false;
+
+    function onEdit() {
+        isEditing = true;
+    }
+
+    $: checked = item.isChecked;
+
     const dispatch = createEventDispatcher<{
-        edit: ItemModel;
         delete: ItemModel;
         check: ItemModel;
     }>();
-
-    function onEdit() {
-        dispatch('edit', item);
-    }
 
     function onDelete() {
         dispatch('delete', item);
@@ -24,8 +28,6 @@
     function onCheck() {
         dispatch('check', item);
     }
-
-    $: checked = item.isChecked;
 </script>
 
 {#if item}
@@ -34,12 +36,13 @@
             <input class="checkbox" type="checkbox" bind:checked on:change={onCheck} />
 
             <div class="item-info">
-                <span class:checked class="title">{item.title}</span>
+                <div class:checked>
+                    <TextInput bind:text={item.title} bind:isFocused={isEditing} />
+                </div>
                 <span class="timestamp">{item.timestamp.toLocaleString()}</span>
             </div>
 
             <DetailButton icon={editIcon} on:click={onEdit} --hover-color="#70a1ff" />
-
             <DetailButton icon={deleteIcon} on:click={onDelete} --hover-color="#ff4757" />
         </div>
     </div>
@@ -52,7 +55,7 @@
         border-radius: 1em;
     }
 
-    .item .content {
+    .content {
         display: flex;
         align-items: center;
         gap: 1em;
@@ -67,13 +70,9 @@
         row-gap: 0.5em;
     }
 
-    .item-info .title {
-        font-size: 1.8em;
-    }
-
-    .item-info .timestamp {
+    .timestamp {
         font-size: 1.5em;
-        color: #747d8c;
+        color: var(--font-color-secondary);
     }
 
     .checked {

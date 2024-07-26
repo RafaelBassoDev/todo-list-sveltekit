@@ -3,10 +3,6 @@
     import ItemList from '$components/ItemList.svelte';
     import ItemModel from '$models/ItemModel';
 
-    function onEdit(e: CustomEvent) {
-        console.log('edit');
-    }
-
     function onDelete(e: CustomEvent<ItemModel>) {
         console.log('delete ' + e.detail.id);
         $items = $items.filter((item) => item.id != e.detail.id);
@@ -18,7 +14,10 @@
     }
 </script>
 
-<ItemList bind:items={$items} on:delete={onDelete} on:edit={onEdit} on:check={onCheck} />
+<div class="content">
+    <div class="header"></div>
+    <ItemList bind:items={$items} on:delete={onDelete} on:check={onCheck} />
+</div>
 
 <style>
     :global(body) {
@@ -27,12 +26,15 @@
         border: none;
     }
     :global(:root) {
+        --font-color-primary: #2f3542;
+        --font-color-secondary: #747d8c;
+
         font-size: 62.5%;
         margin: 0;
         padding: 0;
         border: none;
 
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #2f3542;
+        color: var(--font-color-primary);
     }
 </style>
