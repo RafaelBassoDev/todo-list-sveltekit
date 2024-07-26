@@ -23,8 +23,8 @@
         align-items: center;
         justify-content: center;
 
-        background-color: #f1f2f6;
-        border: none;
+        background-color: var(--button-background-primary);
+        border: transparent;
         padding: 0;
         border-radius: 0.5em;
 
@@ -35,7 +35,7 @@
     }
 
     button:hover {
-        background-color: var(--hover-color, #d7d8dd);
+        background-color: var(--hover-background, var(--button-hover-background));
         transition: 0.2s;
     }
 
@@ -44,7 +44,6 @@
     }
 
     .hover {
-        filter: invert(100%) sepia(12%) saturate(7464%) hue-rotate(289deg) brightness(113%)
-            contrast(117%);
+        filter: var(--button-hover-filter);
     }
 </style>

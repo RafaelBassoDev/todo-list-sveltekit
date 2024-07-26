@@ -26,8 +26,22 @@
         border: none;
     }
     :global(:root) {
+        --background-primary: #1e90ff;
+
+        --item-background-primary: #fff;
+
         --font-color-primary: #2f3542;
         --font-color-secondary: #747d8c;
+
+        --button-background-primary: #f1f2f6;
+        --button-hover-background: #2f3542;
+        --button-hover-filter: invert(100%) sepia(12%) saturate(7464%) hue-rotate(289deg)
+            brightness(113%) contrast(117%);
+
+        --edit-button-tint: #1e90ff;
+        --delete-button-tint: #ff4757;
+
+        --caret-color: #1e90ff;
 
         font-size: 62.5%;
         margin: 0;

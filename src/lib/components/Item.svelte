@@ -42,15 +42,23 @@
                 <span class="timestamp">{item.timestamp.toLocaleString()}</span>
             </div>
 
-            <DetailButton icon={editIcon} on:click={onEdit} --hover-color="#70a1ff" />
-            <DetailButton icon={deleteIcon} on:click={onDelete} --hover-color="#ff4757" />
+            <DetailButton
+                icon={editIcon}
+                on:click={onEdit}
+                --hover-background="var(--edit-button-tint)"
+            />
+            <DetailButton
+                icon={deleteIcon}
+                on:click={onDelete}
+                --hover-background="var(--delete-button-tint)"
+            />
         </div>
     </div>
 {/if}
 
 <style>
     .item {
-        background-color: #fff;
+        background-color: var(--item-background-primary);
         padding: 1.5em 2em;
         border-radius: 1em;
     }
@@ -77,7 +85,7 @@
 
     .checked {
         text-decoration: line-through;
-        color: #747d8c;
+        color: var(--font-color-secondary);
     }
 
     input[type='checkbox'] {
@@ -85,24 +93,5 @@
         min-height: 2em;
         max-width: 2em;
         max-height: 2em;
-
-        /* appearance: none; */
-        border: none;
-        background-color: #a4b0be;
-        display: grid;
-        place-content: center;
-    }
-
-    input[type='checkbox']::before {
-        content: '';
-        width: 0.65em;
-        height: 0.65em;
-        transform: scale(0);
-        transition: 120ms transform ease-in-out;
-        box-shadow: inset 1em 1em var(--form-control-color);
-    }
-
-    input[type='checkbox']:checked::before {
-        transform: scale(1);
     }
 </style>

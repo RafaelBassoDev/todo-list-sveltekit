@@ -19,7 +19,7 @@
     .container {
         border-radius: 1em;
         padding: 1em;
-        background-color: #1e90ff;
+        background-color: var(--background-primary);
 
         display: flex;
         flex-direction: column;

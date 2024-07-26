@@ -48,7 +48,7 @@
 
     .text-input:focus {
         outline: transparent;
-        caret-color: #1e90ff;
+        caret-color: var(--caret-color);
     }
 
     .text-input:disabled {
