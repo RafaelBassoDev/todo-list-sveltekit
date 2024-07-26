@@ -18,6 +18,7 @@
 
 <div class="content">
     <div class="header">
+        <h1>TO-DO LIST 📋</h1>
         <button on:click={handleAddItem}>Add Item</button>
     </div>
     <ItemList items={$items} on:delete={onDelete} on:check={onCheck} />
@@ -63,6 +64,20 @@
         flex-direction: column;
         gap: 1em;
         padding: 1em;
+    }
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        margin-bottom: 1em;
+    }
+
+    .header h1 {
+        text-align: center;
+        font-size: 4em;
+        margin: 0.5em;
     }
 
     .header button {
