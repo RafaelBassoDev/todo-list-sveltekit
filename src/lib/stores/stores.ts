@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 import ItemModel from '$models/ItemModel';
 
 function createItemStore(items: ItemModel[] = []) {
-    const { subscribe, update } = writable(items);
+    const { subscribe, update, set } = writable(items);
 
     return {
         subscribe,
@@ -23,7 +23,9 @@ function createItemStore(items: ItemModel[] = []) {
                     }
                     return element;
                 })
-            )
+            ),
+
+        clearItems: () => set([])
     };
 }
 
