@@ -1,26 +1,24 @@
 <script lang="ts">
-    import Item from '$components/Item.svelte';
-    import type ItemModel from '$models/ItemModel';
     import { items } from '$stores/stores';
+    import ItemList from '$components/ItemList.svelte';
+    import ItemModel from '$models/ItemModel';
 
     function onEdit(e: CustomEvent) {
         console.log('edit');
     }
+
     function onDelete(e: CustomEvent<ItemModel>) {
         console.log('delete ' + e.detail.id);
         $items = $items.filter((item) => item.id != e.detail.id);
     }
+
+    function onCheck(e: CustomEvent<ItemModel>) {
+        let itemIndex = $items.findIndex((model) => model.id == e.detail.id);
+        $items[itemIndex].isChecked = !e.detail.isChecked;
+    }
 </script>
 
-<div class="container">
-    {#if $items.length != 0}
-        {#each $items as item}
-            <Item {item} on:edit={onEdit} on:delete={onDelete} />
-        {/each}
-    {:else}
-        <div class="warning">No items!</div>
-    {/if}
-</div>
+<ItemList bind:items={$items} on:delete={onDelete} on:edit={onEdit} on:check={onCheck} />
 
 <style>
     :global(body) {
@@ -36,23 +34,5 @@
 
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #2f3542;
-    }
-
-    .container {
-        border-radius: 1em;
-        padding: 1em;
-        background-color: #ff6b81;
-
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-    }
-
-    .warning {
-        display: flex;
-        justify-content: center;
-
-        font-size: 2em;
-        padding: 1em;
     }
 </style>

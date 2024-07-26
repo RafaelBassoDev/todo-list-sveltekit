@@ -30,6 +30,7 @@
         display: flex;
         justify-content: center;
 
+        color: white;
         font-size: 2em;
         padding: 1em;
     }
