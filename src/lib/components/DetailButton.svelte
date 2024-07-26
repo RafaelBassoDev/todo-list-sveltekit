@@ -1,10 +1,19 @@
 <script>
-    import deleteIcon from '$assets/icons/delete-icon.svg';
     export let icon;
+
+    let hover = false;
 </script>
 
-<button on:click>
-    <img src={icon} alt="Icon" />
+<button
+    on:click
+    on:mouseenter={() => {
+        hover = true;
+    }}
+    on:mouseleave={() => {
+        hover = false;
+    }}
+>
+    <img class:hover src={icon} alt="Icon" />
 </button>
 
 <style>
@@ -14,8 +23,8 @@
         align-items: center;
         justify-content: center;
 
-        background-color: #f1f2f6;
-        border: none;
+        background-color: var(--button-background-primary);
+        border: transparent;
         padding: 0;
         border-radius: 0.5em;
 
@@ -26,11 +35,15 @@
     }
 
     button:hover {
-        background-color: var(--hover-color, #d7d8dd);
+        background-color: var(--hover-background, var(--button-hover-background));
         transition: 0.2s;
     }
 
     img {
         width: 70%;
+    }
+
+    .hover {
+        filter: var(--button-hover-filter);
     }
 </style>
