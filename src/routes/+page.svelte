@@ -4,19 +4,23 @@
     import ItemModel from '$models/ItemModel';
 
     function onDelete(e: CustomEvent<ItemModel>) {
-        console.log('delete ' + e.detail.id);
-        $items = $items.filter((item) => item.id != e.detail.id);
+        items.removeItem(e.detail);
     }
 
     function onCheck(e: CustomEvent<ItemModel>) {
-        let itemIndex = $items.findIndex((model) => model.id == e.detail.id);
-        $items[itemIndex].isChecked = !e.detail.isChecked;
+        items.checkItem(e.detail);
+    }
+
+    function handleAddItem() {
+        items.addItem(new ItemModel('', new Date()));
     }
 </script>
 
 <div class="content">
-    <div class="header"></div>
-    <ItemList bind:items={$items} on:delete={onDelete} on:check={onCheck} />
+    <div class="header">
+        <button on:click={handleAddItem}>Add Item</button>
+    </div>
+    <ItemList items={$items} on:delete={onDelete} on:check={onCheck} />
 </div>
 
 <style>
