@@ -14,12 +14,21 @@
     function handleAddItem() {
         items.addItem(new ItemModel('', new Date()));
     }
+
+    function handleClearItems() {
+        items.clearItems();
+    }
 </script>
 
 <div class="content">
     <div class="header">
         <h1>TO-DO LIST 📋</h1>
-        <button on:click={handleAddItem}>Add Item</button>
+        <div class="header-actions">
+            <button id="add-button" on:click={handleAddItem}>Add Item</button>
+            <button id="clear-button" on:click={handleClearItems} disabled={$items.length == 0}
+                >Clear</button
+            >
+        </div>
     </div>
     <ItemList items={$items} on:delete={onDelete} on:check={onCheck} />
 </div>
@@ -46,7 +55,11 @@
             brightness(113%) contrast(117%);
 
         --edit-button-tint: #1e90ff;
+        --edit-button-tint-hover: #50a4f8;
+
         --delete-button-tint: #ff4757;
+        --delete-button-tint-hover: #f86b77;
+        --delete-button-tint-disabled: #ffa9b0;
 
         --caret-color: #1e90ff;
 
@@ -80,19 +93,46 @@
         margin: 0.5em;
     }
 
-    .header button {
+    .header-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header-actions button {
         box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
-
-        color: white;
-        background-color: #1e90ff;
 
         border: transparent;
 
         padding: 1em;
         border-radius: 0.4em;
         font-size: 1.5em;
+    }
+
+    .header-actions #add-button {
+        color: white;
+        background-color: var(--edit-button-tint);
+    }
+
+    .header-actions #add-button:hover {
+        background-color: var(--edit-button-tint-hover);
+        transition: 0.2s;
+    }
+
+    .header-actions #clear-button {
+        color: white;
+        background-color: var(--delete-button-tint);
+    }
+
+    .header-actions #clear-button:hover {
+        background-color: var(--delete-button-tint-hover);
+        transition: 0.2s;
+    }
+
+    .header-actions #clear-button:disabled {
+        background-color: var(--delete-button-tint-disabled);
+        transition: 0.4s;
     }
 </style>
