@@ -28,16 +28,18 @@
         margin: 0;
         padding: 0;
         border: none;
+        background: white;
     }
+
     :global(:root) {
         --background-primary: #1e90ff;
 
-        --item-background-primary: #fff;
+        --item-separator-color: #ccc;
 
         --font-color-primary: #2f3542;
         --font-color-secondary: #747d8c;
 
-        --button-background-primary: #f1f2f6;
+        --button-background-primary: transparent;
         --button-hover-background: #2f3542;
         --button-hover-filter: invert(100%) sepia(12%) saturate(7464%) hue-rotate(289deg)
             brightness(113%) contrast(117%);
@@ -54,5 +56,28 @@
 
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: var(--font-color-primary);
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        padding: 1em;
+    }
+
+    .header button {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: white;
+        background-color: #1e90ff;
+
+        border: transparent;
+
+        padding: 1em;
+        border-radius: 0.4em;
+        font-size: 1.5em;
     }
 </style>

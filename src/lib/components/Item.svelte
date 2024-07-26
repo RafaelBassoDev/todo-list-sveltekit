@@ -58,9 +58,8 @@
 
 <style>
     .item {
-        background-color: var(--item-background-primary);
         padding: 1.5em 2em;
-        border-radius: 1em;
+        border-top: 0.2em solid var(--item-separator-color);
     }
 
     .content {

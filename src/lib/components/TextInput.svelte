@@ -50,8 +50,4 @@
         outline: transparent;
         caret-color: var(--caret-color);
     }
-
-    .text-input:disabled {
-        color: currentColor;
-    }
 </style>

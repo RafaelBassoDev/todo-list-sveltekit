@@ -7,31 +7,30 @@
 
 <div class="container">
     {#if items != null && items.length != 0}
-        {#each items as item}
-            <Item {item} on:delete on:check />
-        {/each}
+        <div class="items">
+            {#each items as item}
+                <Item {item} on:delete on:check />
+            {/each}
+        </div>
     {:else}
-        <div class="warning">No items!</div>
+        <div class="warning"><span>No items!</span></div>
     {/if}
 </div>
 
 <style>
-    .container {
-        border-radius: 1em;
-        padding: 1em;
-        background-color: var(--background-primary);
-
+    .items {
         display: flex;
         flex-direction: column;
-        gap: 1em;
+        border-bottom: 0.2em solid var(--item-separator-color);
     }
 
     .warning {
         display: flex;
         justify-content: center;
-
-        color: white;
-        font-size: 2em;
         padding: 1em;
+    }
+
+    .warning span {
+        font-size: 2em;
     }
 </style>
